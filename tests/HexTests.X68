@@ -12,6 +12,7 @@
 *------------------------------------------------------------------------------
     INCLUDE ../src/HexToInt.X68
     INCLUDE ../src/IntToHex.X68
+    INCLUDE ../src/NewLine.X68
 
 
 *------------------------------------------------------------------------------
@@ -51,13 +52,14 @@ Start
     MOVE.B  #13,D0
     TRAP    #15             * Display the hex string
 
-    MOVE.B  #9,D0
-    TRAP    #15             * Halt the simulator
+    BSR     NewLine
+    BRA     Start           * Keep looping
 
 Invalid
     LEA     InvalidMsg,A1
     MOVE.B  #13,D0
-    TRAP    #15
+    TRAP    #15             * Display an error message
+    BSR     NewLine
     BRA     Start
 
 
@@ -80,6 +82,7 @@ InvalidMsg  DC.B    'That is not a valid hexadecial number.',0
 * End
 *------------------------------------------------------------------------------
     END     Start
+
 
 
 
