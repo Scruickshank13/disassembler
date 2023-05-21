@@ -1,0 +1,32 @@
+*-----------------------------------------------------------
+* Title      :Start up
+* Written by :Scott Cruickshank
+* Date       :5/21  
+* Description:Welcome message to load on start of program
+*-----------------------------------------------------------
+
+CR        EQU       $0D
+LF        EQU       $0A    
+
+
+         ORG    $1000
+
+START:    LEA       START_UP,A1              ;Load welcome message on start up
+          MOVE.B    #14,D0
+          TRAP      #15
+          
+          
+
+
+    SIMHALT             ; halt simulator
+
+*VARIABLES
+
+START_UP DC.B       'WOOF WOOF! Welcome to Team Dogs 68k Disassembler' ,CR,LF
+         DC.B       'This program was built to scan and disassemble code at a memory address provided by the user',CR,LF
+         DC.B       'In order for the program to run as intended the user input must follow these parameters' ,CR,LF
+         DC.B       'The address must be in longword hexadecimal format' ,CR,LF
+         DC.B       'The starting memory address must be greater or less than $0x1000' ,CR,LF
+         DC.B       'The ending memory address must be in the following range [0x1000 - 0xFFFFF0]' ,CR,LF,0 
+
+    END    START        ; last line of source
