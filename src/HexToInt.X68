@@ -9,7 +9,7 @@
 *------------------------------------------------------------------------------
 * Subroutine : HexToInt
 * Description: Converts a hexadecimal string to an int.
-* Parameters : (A1) = The NULL-terminated hexadecimal string.
+* Parameters : (A1) = The null-terminated hexadecimal string.
 * Returns    : D0.L = The int.
 *              D1.B = The number of characters converted.
 * Notes:
@@ -21,7 +21,7 @@
 *------------------------------------------------------------------------------
 HexToInt
 
-.Registers  REG     D2/D3/A2
+.Registers  REG     D2-D3/A2
 
     MOVEM.L .Registers,-(SP)    * Preserve D2, D3, and A2
     CLR.L   D2                  * D2 is the result
@@ -31,7 +31,7 @@ HexToInt
 
 .Loop
     MOVE.B  (A2)+,D1            * Read the next char into D1
-    CMPI.B  #0,D1               * If the end of the string has been reached:
+    *CMPI.B  #0,D1               * If the end of the string has been reached:
     BEQ     .Return             *   Conversion complete
     CMPI.B  #8,D3               * If the string is longer than 8 chars:
     BEQ     .Invalid            *   Conversion failure
@@ -98,6 +98,7 @@ HexCharToInt
 .Invalid
     MOVE.B  #-1,D0          * Return -1
     RTS
+
 
 
 
