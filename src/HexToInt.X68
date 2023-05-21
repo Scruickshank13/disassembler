@@ -31,7 +31,8 @@ HexToInt
 
 .Loop
     MOVE.B  (A2)+,D1            * Read the next char into D1
-    *CMPI.B  #0,D1               * If the end of the string has been reached:
+                                * CMP not needed due to how MOVE alters the CCR
+    * CMPI.B  #0,D1             * If the end of the string has been reached:
     BEQ     .Return             *   Conversion complete
     CMPI.B  #8,D3               * If the string is longer than 8 chars:
     BEQ     .Invalid            *   Conversion failure
@@ -98,6 +99,7 @@ HexCharToInt
 .Invalid
     MOVE.B  #-1,D0          * Return -1
     RTS
+
 
 
 
